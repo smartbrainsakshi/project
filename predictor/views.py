@@ -1,8 +1,12 @@
 from django.contrib.auth import authenticate
-from django.shortcuts import render
+from django.db.models import Q
+from django.http import HttpResponse
+from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
-from .models import Prediction, Customer
+from rest_framework.decorators import api_view
 
+from .models import Prediction, Customer
+from django.contrib.auth.models import User
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from keras.models import load_model
@@ -15,6 +19,8 @@ from django.contrib.staticfiles.finders import find
 # Create your views here.
 @csrf_exempt
 def homepage(request):
+    if 'user' not in request.session:
+        redirect('/accounts/login')
     if request.method == 'POST':
         bedrooms = request.POST.get('bedrooms')  # @param {type:"number"}
         bathrooms = request.POST.get('bathrooms')  # @param {type:"number"}
@@ -61,7 +67,7 @@ def homepage(request):
         entry = str(profit) + " Profit" if profit >= 0 else str((-1) * profit) + " Loss"
         Prediction.objects.create(bedrooms=bedrooms, bathrooms=bathrooms, roi=roi, time=time, duration=duration,
                                   condition=condition, square_feet=square_feet, principle=principle,
-                                  zipcode=zipcode, result=entry)
+                                  zipcode=zipcode, result=entry, customer_id=request.session['user'])
         if profit >= 0:
             return render(request, 'LandingPage.html',
                           {'result': 'Your net Profit' ' in this investment will be $  {pf}'.format(pf=profit)})
@@ -76,9 +82,12 @@ def homepage(request):
 # Create your views here.
 @csrf_exempt
 def history(request):
-    results = Prediction.objects.filter()
-    print(results)
-    return render(request, "History.html", {"results": results})
+    if 'user' in request.session:
+
+        results = Prediction.objects.filter(customer_id=request.session['user'])
+        print(results)
+        return render(request, "History.html", {"results": results})
+    return render(request, "History.html", {"results": None})
 
 
 # Create your views here.
@@ -87,10 +96,45 @@ def login(request):
     if request.method == 'POST':
         email_address = request.POST.get('EmailAddress')  # @param {type:"number"}
         password = request.POST.get('Password')  # @param {type:"number"}
-        user = authenticate(email_address=email_address, password=password)
-    if user:
-        customer = Customer.objects.get(email=email_address).id
-        return render(request, 'base.html', {'result': customer})
+        user = authenticate(username=email_address, password=password)
+        print('***', user, email_address, password)
+        if user:
+            customer = Customer.objects.get(email=email_address).id
+            request.session['user'] = customer
+            return redirect('/accounts/predictor')
 
     return render(request, 'base.html', {'result': None})
 
+
+def logout(request):
+
+    request.session.pop('user')
+    return redirect('/accounts/login')
+
+
+@csrf_exempt
+def signup(request):
+    """
+    enrolls customer
+    :param request:
+    :return:
+    """
+
+    if request.method == 'POST':
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        contact = request.POST.get('contact')
+        address_line1 = request.POST.get('address_line1')
+        address_line2 = request.POST.get('address_line2')
+        email = request.POST.get('email')
+        password = request.POST.get('Password')
+        existing_customer = Customer.objects.filter(Q(contact=contact) | Q(email=email)).last()
+        if existing_customer:
+            raise Exception("Already exists")
+        else:
+            customer = Customer.objects.create(first_name=first_name, contact=contact, last_name=last_name,
+                                               address_line1=address_line1, address_line2=address_line2, email=email)
+            print(password)
+            User.objects.create_user(username=email, first_name=first_name, email=email, password=password)
+            return redirect('/accounts/login')
+    return render(request, 'SignUp.html', {'result': None})

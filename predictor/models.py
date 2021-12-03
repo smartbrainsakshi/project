@@ -14,6 +14,7 @@ class Prediction(models.Model):
     roi = models.IntegerField(null=True)
     time = models.IntegerField(null=True)
     result = models.CharField(max_length=128)
+    customer_id = models.IntegerField()
 
 
 class Customer(models.Model):

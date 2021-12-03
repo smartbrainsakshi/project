@@ -40,10 +40,17 @@
 				<div class="clear"> </div>
 			</div>
 			{% if not result %}
-			<form action="#" method="post" id="inform">
-				<input type="text" placeholder="Email Address" name="EmailAddress" id ="EmailAddress" >
+			<form action="#" method="post" id="inform" >
+				<input type="text" placeholder="first_name" name="first_name" id ="first_name" >
+				<input type="text" placeholder="last_name" name="last_name" id="last_name" >
+
+				<input type="text" placeholder="Contact" name="contact" id ="contact" >
+				<input type="text" placeholder="Address line1" name="address_line1" id="address_line1" >
+
+				<input type="text" placeholder="Address Line2" name="address_line2" id ="address_line2" >
+				<input type="text" placeholder="Email" name="email" id="email" >
 				<input type="text" placeholder="Password" name="Password" id="Password" >
-				<input type="submit" value="Submit" id="submit" onclick="checkResult()"/>
+				<input type="submit" value="Submit" id="submit"/>
 			</form>
 			{% endif %}
 			{% if result %}
