@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+<title>Predict Price</title>
+<!-- Custom Theme files -->
+
+<link href="{% static 'css/homePage.css' %}" rel="stylesheet" type="text/css" media="all"/>
+<!-- for-mobile-apps -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- //for-mobile-apps -->
+<!--Google Fonts-->
+<link href='//fonts.googleapis.com/css?family=Cuprum:400,700' rel='stylesheet' type='text/css'>
+<!--google fonts-->
+<script>var __links = document.querySelectorAll('a');function __linkClick(e) { parent.window.postMessage(this.href, '*');} ;for (var i = 0, l = __links.length; i < l; i++) {if ( __links[i].getAttribute('data-t') == '_blank' ) { __links[i].addEventListener('click', __linkClick, false);}}</script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script>$(document).ready(function(c) {
+	$('.cls-con').on('click', function(c){
+		$('.contact').fadeOut('slow', function(c){
+	  		$('.contact').remove();
+		});
+	});
+});
+</script>
+</head>
+<body>
+<!--header start here-->
+<div class="header agile">
+	<div class="wrap">
+
+
+		<div class="contact">
+
+			<div class="contact-head">
+				<h2>Login</h2>
+				<div class="cls-con"><a href="/accounts/profile"><img src="/static/images/exit.png" alt="back"> </a></div>
+
+				<div class="clear"> </div>
+			</div>
+			{% if not result %}
+			<form action="#" method="post" id="inform" style = "display:none">
+				<input type="text" placeholder="Email Address" name="EmailAddress" id ="EmailAddress" >
+				<input type="text" placeholder="Password" name="Password" id="Password" >
+				<input type="submit" value="Submit" id="submit" onclick="checkResult()"/>
+			</form>
+			{% endif %}
+			{% if result %}
+				<p>Predicted Price: {{result}} USD</p>
+			{% endif %}
+
+		</div>
+	</div>
+</div>
+
+
+</body>
+</html>

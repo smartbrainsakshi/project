@@ -1,0 +1,162 @@
+{% load static %}
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+<title>Predict Price</title>
+<!-- Custom Theme files -->
+
+<link href="{% static 'css/homePage.css' %}" rel="stylesheet" type="text/css" media="all"/>
+<!-- for-mobile-apps -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- //for-mobile-apps -->
+<!--Google Fonts-->
+<link href='//fonts.googleapis.com/css?family=Cuprum:400,700' rel='stylesheet' type='text/css'>
+<!--google fonts-->
+<script>var __links = document.querySelectorAll('a');function __linkClick(e) { parent.window.postMessage(this.href, '*');} ;for (var i = 0, l = __links.length; i < l; i++) {if ( __links[i].getAttribute('data-t') == '_blank' ) { __links[i].addEventListener('click', __linkClick, false);}}</script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script>$(document).ready(function(c) {
+	$('.cls-con').on('click', function(c){
+		$('.contact').fadeOut('slow', function(c){
+	  		$('.contact').remove();
+		});
+	});
+});
+</script>
+</head>
+<body>
+<!--header start here-->
+<div class="header agile">
+	<div class="wrap">
+
+		<div class="navigation">
+			<a class="button" >
+			<img src="https://www.pngitem.com/pimgs/m/294-2947257_interface-icons-user-avatar-profile-user-avatar-png.png">
+            <div class="logout">LOGOUT</div>
+			</a>
+		</div>
+
+		<div class="contact">
+
+			<div class="contact-head">
+				<h2>Predict Profit</h2>
+				<div class="cls-con"><a href="/accounts/profile"><img src="/static/images/exit.png" alt="back"> </a></div>
+
+				<div class="clear"> </div>
+			</div>
+			 <a href="/accounts/profile/history">
+			<input type="submit" value="History" id="history" />
+			 </a>
+			<div id="vis">
+			</br>
+			</br>
+			</br>
+			</br>
+			</div>
+			<input type="submit" value="Predict" id="Predict" onclick="makeFormVisible()" />
+			</br>
+			</br>
+			{% if not result %}
+			<form action="#" method="post" id="inform" style = "display:none">
+				<input type="text" placeholder="zipcode" name="zipcode" id ="zipcode" >
+				<input type="text" class="no-mar" placeholder="square_feet" name="square_feet" id="square_feet" >
+				<input type="text" placeholder="condition" name="condition" id="condition" >
+		        <input type="text" class="no-mar" placeholder="bathrooms" name="bathrooms" id="bathrooms" >
+		        <input type="text" placeholder="bedrooms" name="bedrooms" id="bedroom">
+				 <input type="text" class="no-mar" placeholder="Duration to calculate" id="duration" name="duration" >
+
+				<div >
+				<label><input type="checkbox" id="mortgage" onclick="checkMortgage()"/> Add mortgage Amount </label>
+				</div>
+                   <br/>
+				<input type="text" placeholder="Mortgaged Amount" id = "amount" name="mortgage_principle" style = "display:none">
+		        <input type="text"  placeholder="Rate of Interest" id = "roi" name="rio" style = "display:none">
+		        <input type="text" placeholder="time" id = "time" name="time" style = "display:none">
+
+				<input type="submit" value="Submit" id="submit" onclick="checkResult()"/>
+
+			</form>
+			{% endif %}
+			{% if result %}
+				<p>Predicted Price: {{result}} USD</p>
+			{% endif %}
+
+		</div>
+	</div>
+</div>
+
+
+</body>
+<script>
+
+	function checkMortgage()
+	{
+		var mortgage = document.getElementById("mortgage");
+		var amount = document.getElementById("amount");
+		var roi = document.getElementById("roi");
+		var time = document.getElementById("time");
+
+		if(mortgage.checked==true)
+		{
+		  roi.style.display="block";
+		  amount.style.display="block";
+		  time.style.display="block";
+
+		}
+		else
+		{
+		  roi.style.display="none";
+		  amount.style.display="none";
+		  time.style.display="none";
+
+		}
+	}
+
+	function checkResult()
+	{
+		var mortgage = document.getElementById("mortgage");
+		var amount = document.getElementById("amount");
+		var roi = document.getElementById("roi");
+		var time = document.getElementById("time");
+		var submit = document.getElementById("submit");
+		var duration = document.getElementById("duration");
+		var bedroom = document.getElementById("bedroom");
+		var bathrooms = document.getElementById("bathrooms");
+		var condition = document.getElementById("condition");
+		var square_feet = document.getElementById("square_feet");
+		var zipcode = document.getElementById("zipcode");
+		var text = document.getElementById("text");
+		  roi.style.display="none";
+		  amount.style.display="none";
+		  time.style.display="none";
+		  mortgage.style.display="none";
+		  submit.style.display="none";
+		  duration.style.display="none";
+		  bedroom.style.display="none";
+		  bathrooms.style.display="none";
+		  condition.style.display="none";
+		  square_feet.style.display="none";
+		  zipcode.style.display="none";
+		  text.style.display ="none";
+
+	}
+
+		function makeFormVisible()
+	{
+		var predict = document.getElementById("Predict");
+		var history = document.getElementById("history");
+		var vis = document.getElementById("vis");
+		var inform = document.getElementById("inform");
+	    predict.style.display="none";
+	    history.style.display="none";
+	    vis.style.display="none";
+		inform.style.display="block";
+
+
+	}
+
+
+
+</script>
+</html>
