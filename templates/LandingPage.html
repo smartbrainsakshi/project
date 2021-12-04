@@ -594,7 +594,7 @@ a {
 
                     <div class="navbar-collapse collapse" id="mobile_menu">
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="#">Home</a></li>
+                            <li class="active"><a href="/accounts/predictor/">Home</a></li>
                             <li><a href="/accounts/history">History</a></li>
                             <li><a href="/accounts/logout" style="left: 800px">LogOut</a></li>
                         </ul>
@@ -619,12 +619,12 @@ a {
 			{% if not result %}
 			<form action="#" method="post" id="inform" >
 				<input type="text" style="width:100%" placeholder="House Tag" name="house_name" id="house_name"></input>
-				<input type="text" style="width: 50%" placeholder="zipcode" name="zipcode" id ="zipcode" >
-				<input type="text"  style="width: 49%" placeholder="square_feet" name="square_feet" id="square_feet" >
-				<input type="text" style="width: 50%" placeholder="condition" name="condition" id="condition" >
-		        <input type="text" style="width: 49%" placeholder="bathrooms" name="bathrooms" id="bathrooms" >
-		        <input type="text" style="width: 50%" placeholder="bedrooms" name="bedrooms" id="bedroom">
-				 <input type="text" style="width: 49%" placeholder="Duration to calculate" id="duration" name="duration" >
+				<input type="text" style="width: 50%" placeholder="Zipcode" name="zipcode" id ="zipcode" >
+				<input type="text"  style="width: 49%" placeholder="Square feet" name="square_feet" id="square_feet" >
+				<input type="text" style="width: 50%" placeholder="Age of House" name="condition" id="condition" >
+		        <input type="text" style="width: 49%" placeholder="Bathrooms" name="bathrooms" id="bathrooms" >
+		        <input type="text" style="width: 50%" placeholder="Bedrooms" name="bedrooms" id="bedroom">
+				 <input type="text" style="width: 49%" placeholder="Duration to calculate CashFlow(in Years)" id="duration" name="duration" >
 
 				<div >
 				<label id="lab"> <input type="checkbox" id="mortgage" onclick="checkMortgage()"/> Add mortgage Amount </label>
@@ -632,14 +632,14 @@ a {
                    <br/>
 				<input type="text" style="width: 100% ;display:none;" placeholder="Mortgaged Amount" id = "amount" name="mortgage_principle" >
 		        <input type="text" style="width: 100%;display:none;" placeholder="Rate of Interest" id = "roi" name="rio" style = "display:none">
-		        <input type="text" style="width: 100%;display:none;" placeholder="time" id = "time" name="time" style = "display:none">
+		        <input type="text" style="width: 100%;display:none;" placeholder="Time Period of Load" id = "time" name="time" style = "display:none">
 
 				<input type="submit"  value="Submit" id="submit" onclick="checkResult()"/>
 
 			</form>
 			{% endif %}
 			{% if result %}
-				<p>Predicted Price: {{result}} </p>
+				<p>Your Prediction: {{result}} </p>
 			{% endif %}
 
 		</div>

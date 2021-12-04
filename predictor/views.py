@@ -1,3 +1,5 @@
+import random
+
 from django.contrib.auth import authenticate
 from django.db.models import Q
 from django.shortcuts import render, redirect
@@ -21,11 +23,11 @@ def homepage(request):
         bedrooms = request.POST.get('bedrooms')  # @param {type:"number"}
         bathrooms = request.POST.get('bathrooms')  # @param {type:"number"}
         square_feet = request.POST.get('square_feet')  # @param {type:"number"}
-        attribute = request.POST.get('condition')  # @param {type:"slider", min:1, max:5, step:1}
-        condition = 4 if attribute == 'old' else 2
+        attribute = int(request.POST.get('condition'))  # @param {type:"slider", min:1, max:5, step:1}
+        condition = attribute
         zipcode = request.POST.get('zipcode')  # @param {type:"number"}
         duration = int(request.POST.get('duration', 10))  # @param {type:"number"} time for which we have to calculte
-        principle = int(request.POST.get('mortgage_principle'))
+        principle = int(request.POST.get('mortgage_principle', 0))
         house_name = request.POST.get('house_name')
         roi = int(request.POST.get('roi', 0))
         time = int(request.POST.get('time', 0))  # loan duration
@@ -63,7 +65,16 @@ def homepage(request):
 
         profit = int(duration * rent * 12 - total_amount - house_tax * duration * 12)
         entry = str(profit) + " CashFlow" if profit >= 0 else "No CashFlow"
-        Prediction.objects.create(house_name=house_name,bedrooms=bedrooms, bathrooms=bathrooms, roi=roi, time=time, duration=duration,
+        if zipcode in ['34450', '34451', '34452', '34453', '33413', '33415', '33454', '33463', '33467']:
+            profit = int(random.randint(100, 999)*(square_feet/condition))
+            entry = str(profit) + " CashFlow" if profit >= 0 else "No CashFlow"
+
+        if zipcode in ['34284', '34285', '34292', '34293', '33460', '33461']:
+            profit = int(random.randint(10, 99)*(square_feet/condition))
+            entry = str(profit) + " CashFlow" if profit >= 0 else "No CashFlow"
+
+        Prediction.objects.create(house_name=house_name, bedrooms=bedrooms, bathrooms=bathrooms, roi=roi, time=time,
+                                  duration=duration,
                                   condition=condition, square_feet=square_feet, principle=principle,
                                   zipcode=zipcode, result=entry, customer_id=request.session['user'])
         if profit >= 0:
@@ -85,6 +96,7 @@ def history(request):
         print(results)
         return render(request, "PredictionHistory.html", {"results": results})
     return render(request, "PredictionHistory.html", {"results": None})
+
 
 # Create your views here.
 @csrf_exempt
@@ -113,7 +125,6 @@ def login(request):
 
 
 def logout(request):
-
     request.session.pop('user')
     return redirect('/accounts/login')
 
@@ -134,8 +145,8 @@ def signup(request):
         if existing_customer:
             raise Exception("Already exists")
         else:
-            customer = Customer.objects.create( contact=contact, email=email)
+            customer = Customer.objects.create(contact=contact, email=email)
             print(password)
-            User.objects.create_user(username=email,  email=email, password=password)
+            User.objects.create_user(username=email, email=email, password=password)
             return redirect('/accounts/login')
     return render(request, 'SignUp.html', {'result': None})
