@@ -34,29 +34,24 @@
 		<div class="contact">
 
 			<div class="contact-head">
-				<h2>Login</h2>
-				<div class="cls-con"><a href="/accounts/profile"><img src="/static/images/exit.png" alt="back"> </a></div>
+				<h3>Register</h3>
 
 				<div class="clear"> </div>
 			</div>
-			{% if not result %}
+
 			<form action="#" method="post" id="inform" >
-				<input type="text" placeholder="first_name" name="first_name" id ="first_name" >
-				<input type="text" placeholder="last_name" name="last_name" id="last_name" >
 
-				<input type="text" placeholder="Contact" name="contact" id ="contact" >
-				<input type="text" placeholder="Address line1" name="address_line1" id="address_line1" >
-
-				<input type="text" placeholder="Address Line2" name="address_line2" id ="address_line2" >
-				<input type="text" placeholder="Email" name="email" id="email" >
-				<input type="text" placeholder="Password" name="Password" id="Password" >
+				<input type="text" style="width:94%" placeholder="Contact Number" name="contact" id ="contact" >
+				<br></br>
+				<input type="text" style="width:94%" placeholder="Email Address" name="email" id="email" >
+				<br></br>
+				<input type="text" style="width:94%" placeholder="Password" name="Password" id="Password" >
+				<br></br>
 				<input type="submit" value="Submit" id="submit"/>
-			</form>
-			{% endif %}
-			{% if result %}
-				<p>Predicted Price: {{result}} USD</p>
-			{% endif %}
 
+			</form>
+
+			<a href="/accounts/login" style="margin-left:240px">Already Registered? Login</a>
 		</div>
 	</div>
 </div>

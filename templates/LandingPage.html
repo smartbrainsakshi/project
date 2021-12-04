@@ -26,53 +26,58 @@
 </script>
 </head>
 <body>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<div class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <div class="navbar-header">
+                        <button class="navbar-toggle" data-target="#mobile_menu" data-toggle="collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+                        <a href="#" class="navbar-brand">CASHFLOW</a>
+                    </div>
+
+                    <div class="navbar-collapse collapse" id="mobile_menu">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="#">Home</a></li>
+                            <li><a href="/accounts/history">History</a></li>
+                            <li><a href="/accounts/graphs">Graphs</a></li>
+                            <li><a href="/accounts/logout" style="left: 800px">LogOut</a></li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <!--header start here-->
 <div class="header agile">
 	<div class="wrap">
-
-		<div class="navigation">
-			<a class="button" href="/accounts/logout" >
-			<img src="https://www.pngitem.com/pimgs/m/294-2947257_interface-icons-user-avatar-profile-user-avatar-png.png">
-            <div class="logout">LOGOUT</div>
-			</a>
-		</div>
-
 		<div class="contact">
 
 			<div class="contact-head">
-				<h2>Predict Profit</h2>
-				<div class="cls-con"><a href="/accounts/profile"><img src="/static/images/exit.png" alt="back"> </a></div>
-
+				<h4>Predict Profit</h4>
 				<div class="clear"> </div>
 			</div>
-			 <a href="/accounts/history">
-			<input type="submit" value="History" id="history" />
-			 </a>
-			<div id="vis">
-			</br>
-			</br>
-			</br>
-			</br>
-			</div>
-			<input type="submit" value="Predict" id="Predict" onclick="makeFormVisible()" />
-			</br>
-			</br>
 			{% if not result %}
-			<form action="#" method="post" id="inform" style = "display:none">
-				<input type="text" placeholder="zipcode" name="zipcode" id ="zipcode" >
-				<input type="text" class="no-mar" placeholder="square_feet" name="square_feet" id="square_feet" >
-				<input type="text" placeholder="condition" name="condition" id="condition" >
-		        <input type="text" class="no-mar" placeholder="bathrooms" name="bathrooms" id="bathrooms" >
-		        <input type="text" placeholder="bedrooms" name="bedrooms" id="bedroom">
-				 <input type="text" class="no-mar" placeholder="Duration to calculate" id="duration" name="duration" >
+			<form action="#" method="post" id="inform" >
+				<input type="text" style="width:100%" placeholder="House Name" name="house_name" id="house_name"></input>
+				<input type="text" style="width: 50%" placeholder="zipcode" name="zipcode" id ="zipcode" >
+				<input type="text"  style="width: 49%" placeholder="square_feet" name="square_feet" id="square_feet" >
+				<input type="text" style="width: 50%" placeholder="condition" name="condition" id="condition" >
+		        <input type="text" style="width: 49%" placeholder="bathrooms" name="bathrooms" id="bathrooms" >
+		        <input type="text" style="width: 50%" placeholder="bedrooms" name="bedrooms" id="bedroom">
+				 <input type="text" style="width: 49%" placeholder="Duration to calculate" id="duration" name="duration" >
 
 				<div >
 				<label><input type="checkbox" id="mortgage" onclick="checkMortgage()"/> Add mortgage Amount </label>
 				</div>
                    <br/>
-				<input type="text" placeholder="Mortgaged Amount" id = "amount" name="mortgage_principle" style = "display:none">
-		        <input type="text"  placeholder="Rate of Interest" id = "roi" name="rio" style = "display:none">
-		        <input type="text" placeholder="time" id = "time" name="time" style = "display:none">
+				<input type="text" style="width: 100% ;display:none;" placeholder="Mortgaged Amount" id = "amount" name="mortgage_principle" >
+		        <input type="text" style="width: 100%;display:none;" placeholder="Rate of Interest" id = "roi" name="rio" style = "display:none">
+		        <input type="text" style="width: 100%;display:none;" placeholder="time" id = "time" name="time" style = "display:none">
 
 				<input type="submit" value="Submit" id="submit" onclick="checkResult()"/>
 

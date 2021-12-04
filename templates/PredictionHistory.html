@@ -1,43 +1,183 @@
-<main>
-  <ol class="gradient-list">
-    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-    <li>Aenean tincidunt elit at ipsum cursus, vitae interdum nulla suscipit.</li>
-    <li>Curabitur in orci vel risus facilisis accumsan.</li>
-    <li>Morbi eleifend tortor lacinia sapien sagittis, quis pellentesque felis egestas.</li>
-    <li>Aenean viverra dui quis leo lacinia fringilla.</li>
-    <li>Sed varius lectus ac condimentum egestas.</li>
-    <li>Maecenas faucibus lorem nec lorem posuere, a rhoncus velit porttitor.</li>
-    <li>Proin porta arcu ac elit malesuada pulvinar.</li>
-    <li>Phasellus vitae felis sit amet mi gravida volutpat.</li>
-    <li>Curabitur vulputate urna non efficitur interdum.</li>
-    <li>Curabitur dapibus enim in consectetur imperdiet.</li>
-    <li>Suspendisse consectetur nibh non condimentum porta.</li>
-    <li>Ut placerat diam in cursus aliquet.</li>
-    <li>Praesent vitae quam id tortor malesuada viverra ut at elit.</li>
-    <li>Vivamus feugiat justo id volutpat rutrum.</li>
-    <li>Nulla volutpat erat non mauris condimentum, nec consequat elit posuere.</li>
-    <li>Vestibulum eu risus efficitur, porta lacus a, mollis metus.</li>
-    <li>Maecenas finibus arcu vel urna commodo, ac bibendum massa vestibulum.</li>
-    <li>Praesent eleifend leo eget consectetur interdum.</li>
-    <li>Suspendisse et lectus gravida, interdum mauris aliquet, mattis purus.</li>
-    <li>In nec nisl feugiat, blandit odio non, vulputate neque.</li>
-    <li>Sed id felis mollis, bibendum orci a, condimentum augue.</li>
-    <li>Etiam eleifend ipsum nec nibh aliquam, non commodo risus eleifend.</li>
-    <li>Curabitur in ipsum eget lacus blandit maximus in at sem.</li>
-    <li>Curabitur sagittis ante nec libero maximus, ut imperdiet elit egestas.</li>
-    <li>Proin congue felis sed ultrices elementum.</li>
-    <li>Duis sit amet velit et lectus eleifend interdum non quis ex.</li>
-    <li>Praesent congue lectus a felis pharetra malesuada.</li>
-    <li>Sed vel mauris condimentum, egestas dolor eu, porttitor nisl.</li>
-    <li>Donec sed elit tincidunt, accumsan magna sed, facilisis libero.</li>
-    <li>Curabitur vel purus quis justo placerat euismod mollis ac arcu.</li>
-    <li>Sed eget mi et justo luctus mollis ut non augue.</li>
-    <li>Suspendisse sit amet lectus et magna euismod tempor.</li>
-    <li>Vestibulum accumsan velit et ipsum pellentesque, vitae ultricies erat blandit.</li>
-    <li>Pellentesque vel dolor ac risus efficitur convallis.</li>
-    <li>Maecenas feugiat quam at facilisis dapibus.</li>
-    <li>Cras commodo leo sit amet lacus lacinia, eget rutrum sem sodales.</li>
-    <li>Ut sit amet risus finibus, iaculis lectus sit amet, varius lectus.</li>
-    <li>Duis dignissim elit eget erat maximus luctus.</li>
-  </ol>
-</main>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+body{
+  padding: 0 2%;
+  color: ##BF78B2;
+  background: #28B2B9;
+}
+.X{
+  margin: auto;
+  padding: 1% 2%;
+  max-width: 1440px;
+  border-radius: 5px;
+  background: #ecf0f1;
+  box-shadow: 0 2px 6px 0 rgba(0,0,0, .3);
+}
+h1,h2,h3{
+  text-align: center;
+  font-family: 'Baloo Tamma', cursive;
+}
+li{
+  color: #2c3e50;
+  font-size: 18px;
+  line-height: 30px;
+  text-align: justify;
+  letter-spacing: 1px;
+  font-family: 'Raleway', serif;
+}
+/*SG = style grid*/
+.SG{
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+.SG .sgLi{
+  min-width: 24%;
+  margin: 2% .35%;
+  display: inline-flex;
+  box-shadow: 0 2px 4px rgba(0,0,0, .2);
+}
+.SG .sgLi:hover{
+  box-shadow:0 5px 10px rgba(0,0,0,.15);}
+.SG .box{
+  width: 100%;
+  height: 100vh;
+  padding: 1% 2%;
+  background: #fff;
+  min-height: 200px;
+  max-height: 220px;
+  box-sizing: border-box;
+}
+/*Styles */
+.df{list-style-type: disc;}
+.s1{list-style-type: square;}
+.s2{list-style-type: circle;}
+.s3{list-style-type: decimal;}
+.s4{list-style-type: decimal-leading-zero;}
+.s5{list-style-type: lower-alpha;}
+.s6{list-style-type: upper-alpha;}
+.s7{list-style-type: lower-roman;}
+.s8{list-style-type: upper-roman;}
+.s9{list-style-type: lower-greek;}
+.s10{list-style-type: georgian;}
+.s11{list-style-type: hebrew;}
+.s12{list-style-type: hiragana;}
+.s13{list-style-type: hiragana-iroha;}
+.s14{list-style-type: katakana;}
+.s15{list-style-type: katakana-iroha;}
+.s16{list-style-type: cjk-ideographic;}
+.s17{list-style-image: url(//goo.gl/L3tqpe);}
+.s18{list-style: none;}
+.s18 li:before{
+  content: '';
+  width: 20px;
+  height: 20px;
+  margin-right: 15px;
+  display: inline-block;
+  background: url(//goo.gl/lcPSVD);
+  background-position: 50%;
+}
+.s19{list-style: none;}
+.s19 li:before{
+  content: '\f0a9';
+  margin-right: 15px;
+  font-family: FontAwesome;
+}
+
+/* responsive grid*/
+@media (max-width: 970px){
+  .SG .sgLi{width: 180px;}}
+@media (max-width: 425px){
+  .SG .sgLi{width: 100%;}
+}
+</style>
+<body>
+
+</body>
+</html>
+{% load static %}
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+<title>Predict Price</title>
+<!-- Custom Theme files -->
+
+<link href="{% static 'css/homePage.css' %}" rel="stylesheet" type="text/css" media="all"/>
+<!-- for-mobile-apps -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- //for-mobile-apps -->
+<!--Google Fonts-->
+<link href='//fonts.googleapis.com/css?family=Cuprum:400,700' rel='stylesheet' type='text/css'>
+<!--google fonts-->
+<script>var __links = document.querySelectorAll('a');function __linkClick(e) { parent.window.postMessage(this.href, '*');} ;for (var i = 0, l = __links.length; i < l; i++) {if ( __links[i].getAttribute('data-t') == '_blank' ) { __links[i].addEventListener('click', __linkClick, false);}}</script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script>$(document).ready(function(c) {
+	$('.cls-con').on('click', function(c){
+		$('.contact').fadeOut('slow', function(c){
+	  		$('.contact').remove();
+		});
+	});
+});
+</script>
+</head>
+<body>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<div class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <div class="navbar-header">
+                        <button class="navbar-toggle" data-target="#mobile_menu" data-toggle="collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+                        <a href="#" class="navbar-brand">CASHFLOW</a>
+                    </div>
+
+                    <div class="navbar-collapse collapse" id="mobile_menu">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="#">Home</a></li>
+                            <li><a href="/accounts/history">History</a></li>
+                            <li><a href="/accounts/graphs">Graphs</a></li>
+                            <li><a href="/accounts/logout" style="left: 750px">LogOut</a></li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!--header start here-->
+<div class="header agile">
+	<h1>Your Predictions </h1>
+
+<ul class="SG">
+{% for each in results %}
+<li class="sgLi">
+    <div class="box">
+   <h3>{{each.house_name}}</h3>
+   <ol >
+    <li>Size : {{each.square_feet}}</li>
+    <li>Zip code : {{each.zipcode}}</li>
+    <li>Bedroom : {{each.bedrooms}}</li>
+    <li>Prediction : ${{each.result}}</li>
+   </ol>
+  </div>
+
+ </li>
+{% endfor %}
+</ul>
+</div>
+
+
+</body>
+<script>
+</script>
+</html>

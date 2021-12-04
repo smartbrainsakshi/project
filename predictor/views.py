@@ -1,9 +1,6 @@
 from django.contrib.auth import authenticate
 from django.db.models import Q
-from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from django.views.decorators.csrf import csrf_exempt
-from rest_framework.decorators import api_view
 
 from .models import Prediction, Customer
 from django.contrib.auth.models import User
@@ -11,7 +8,6 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from keras.models import load_model
 import numpy as np
-from rest_framework.response import Response
 from sklearn.preprocessing import StandardScaler
 from django.contrib.staticfiles.finders import find
 
@@ -29,9 +25,10 @@ def homepage(request):
         zipcode = request.POST.get('zipcode')  # @param {type:"number"}
         duration = int(request.POST.get('duration', 10))  # @param {type:"number"} time for which we have to calculte
         principle = int(request.POST.get('mortgage_principle'))
+        house_name = request.POST.get('house_name')
         roi = int(request.POST.get('roi', 0))
         time = int(request.POST.get('time', 0))  # loan duration
-
+        print(house_name)
         url = find('house_price.h5')
         model = load_model(url)
         s_scaler = StandardScaler()
@@ -46,7 +43,7 @@ def homepage(request):
         input = np.array([bedrooms, bathrooms, square_feet, condition, zipcode])
         input = input.reshape((1, -1))
         input = s_scaler.fit_transform(input.astype(np.float))
-        rent = model.predict(input)[0][0]
+        rent = int(model.predict(input)[0][0])
 
         url = find('house_tax.h5')
         model = load_model(url)
@@ -55,7 +52,7 @@ def homepage(request):
         input = input.reshape((1, -1))
         input = s_scaler.fit_transform(input.astype(np.float))
 
-        house_tax = model.predict(input)[0][0]
+        house_tax = int( model.predict(input)[0][0])
         total_amount = int(price)
         if principle:
             print(price, principle)
@@ -63,9 +60,9 @@ def homepage(request):
             amount = principle * (pow((1 + roi / 100), time))
             total_amount = loan_amount + amount
 
-        profit = duration * rent * 12 - total_amount - house_tax * duration * 12
+        profit = int(duration * rent * 12 - total_amount - house_tax * duration * 12)
         entry = str(profit) + " Profit" if profit >= 0 else str((-1) * profit) + " Loss"
-        Prediction.objects.create(bedrooms=bedrooms, bathrooms=bathrooms, roi=roi, time=time, duration=duration,
+        Prediction.objects.create(house_name=house_name,bedrooms=bedrooms, bathrooms=bathrooms, roi=roi, time=time, duration=duration,
                                   condition=condition, square_feet=square_feet, principle=principle,
                                   zipcode=zipcode, result=entry, customer_id=request.session['user'])
         if profit >= 0:
@@ -83,11 +80,10 @@ def homepage(request):
 @csrf_exempt
 def history(request):
     if 'user' in request.session:
-
         results = Prediction.objects.filter(customer_id=request.session['user'])
         print(results)
-        return render(request, "History.html", {"results": results})
-    return render(request, "History.html", {"results": None})
+        return render(request, "PredictionHistory.html", {"results": results})
+    return render(request, "PredictionHistory.html", {"results": None})
 
 
 # Create your views here.

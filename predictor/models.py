@@ -10,6 +10,7 @@ class Prediction(models.Model):
     condition = models.IntegerField()
     zipcode = models.IntegerField()
     duration = models.IntegerField()
+    house_name = models.CharField(max_length=128, null=True)
     principle = models.IntegerField(null=True)
     roi = models.IntegerField(null=True)
     time = models.IntegerField(null=True)

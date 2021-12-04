@@ -34,21 +34,20 @@
 		<div class="contact">
 
 			<div class="contact-head">
-				<h2>Login</h2>
-				<div class="cls-con"><a href="/accounts/profile"><img src="/static/images/exit.png" alt="back"> </a></div>
+				<h3>Login</h3>
 
 				<div class="clear"> </div>
 			</div>
-			{% if not result %}
+
 			<form action="#" method="post" id="inform">
-				<input type="text" placeholder="Email Address" name="EmailAddress" id ="EmailAddress" >
-				<input type="text" placeholder="Password" name="Password" id="Password" >
+				<input type="text" style="width:94%" placeholder="Email Address" name="EmailAddress" id ="EmailAddress" >
+				<br></br>
+				<input type="password" style="width:94%" placeholder="Password" name="Password" id="Password" >
+				<br></br>
 				<input type="submit" value="Submit" id="submit" onclick="checkResult()"/>
 			</form>
-			{% endif %}
-			{% if result %}
-				<p>Predicted Price: {{result}} USD</p>
-			{% endif %}
+
+			 	<a href="/accounts/signup" style="margin-left:230px">Not yet Registered? Sign Up</a>
 
 		</div>
 	</div>
