@@ -21,7 +21,8 @@ def homepage(request):
         bedrooms = request.POST.get('bedrooms')  # @param {type:"number"}
         bathrooms = request.POST.get('bathrooms')  # @param {type:"number"}
         square_feet = request.POST.get('square_feet')  # @param {type:"number"}
-        condition = request.POST.get('condition')  # @param {type:"slider", min:1, max:5, step:1}
+        attribute = request.POST.get('condition')  # @param {type:"slider", min:1, max:5, step:1}
+        condition = 4 if attribute == 'old' else 2
         zipcode = request.POST.get('zipcode')  # @param {type:"number"}
         duration = int(request.POST.get('duration', 10))  # @param {type:"number"} time for which we have to calculte
         principle = int(request.POST.get('mortgage_principle'))
@@ -52,7 +53,7 @@ def homepage(request):
         input = input.reshape((1, -1))
         input = s_scaler.fit_transform(input.astype(np.float))
 
-        house_tax = int( model.predict(input)[0][0])
+        house_tax = int(model.predict(input)[0][0])
         total_amount = int(price)
         if principle:
             print(price, principle)
@@ -61,17 +62,17 @@ def homepage(request):
             total_amount = loan_amount + amount
 
         profit = int(duration * rent * 12 - total_amount - house_tax * duration * 12)
-        entry = str(profit) + " Profit" if profit >= 0 else str((-1) * profit) + " Loss"
+        entry = str(profit) + " CashFlow" if profit >= 0 else "No CashFlow"
         Prediction.objects.create(house_name=house_name,bedrooms=bedrooms, bathrooms=bathrooms, roi=roi, time=time, duration=duration,
                                   condition=condition, square_feet=square_feet, principle=principle,
                                   zipcode=zipcode, result=entry, customer_id=request.session['user'])
         if profit >= 0:
             return render(request, 'LandingPage.html',
-                          {'result': 'Your net Profit' ' in this investment will be $  {pf}'.format(pf=profit)})
+                          {'result': 'Your net CashFlow' ' in this investment will be $  {pf}'.format(pf=profit)})
         else:
             profit = (-1) * profit
             return render(request, 'LandingPage.html',
-                          {'result': 'Your net Loss' ' in this investment will be $  {pf}'.format(pf=profit)})
+                          {'result': ' No CashFlow. Bad Investment.'})
 
     return render(request, 'LandingPage.html', {'result': None})
 
@@ -84,6 +85,15 @@ def history(request):
         print(results)
         return render(request, "PredictionHistory.html", {"results": results})
     return render(request, "PredictionHistory.html", {"results": None})
+
+# Create your views here.
+@csrf_exempt
+def graphs(request):
+    if 'user' in request.session:
+        results = Prediction.objects.filter(customer_id=request.session['user'])
+        print(results)
+        return render(request, "graphs.html", {"results": results})
+    return render(request, "graphs.html", {"results": None})
 
 
 # Create your views here.
@@ -117,20 +127,15 @@ def signup(request):
     """
 
     if request.method == 'POST':
-        first_name = request.POST.get('first_name')
-        last_name = request.POST.get('last_name')
         contact = request.POST.get('contact')
-        address_line1 = request.POST.get('address_line1')
-        address_line2 = request.POST.get('address_line2')
         email = request.POST.get('email')
         password = request.POST.get('Password')
         existing_customer = Customer.objects.filter(Q(contact=contact) | Q(email=email)).last()
         if existing_customer:
             raise Exception("Already exists")
         else:
-            customer = Customer.objects.create(first_name=first_name, contact=contact, last_name=last_name,
-                                               address_line1=address_line1, address_line2=address_line2, email=email)
+            customer = Customer.objects.create( contact=contact, email=email)
             print(password)
-            User.objects.create_user(username=email, first_name=first_name, email=email, password=password)
+            User.objects.create_user(username=email,  email=email, password=password)
             return redirect('/accounts/login')
     return render(request, 'SignUp.html', {'result': None})

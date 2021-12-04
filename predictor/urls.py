@@ -8,6 +8,7 @@ urlpatterns = [
     path('signup/', views.signup),
     path('logout/', views.logout),
     path('predictor/', views.homepage),
+    path('graphs/', views.graphs),
     path('history/', views.history)
 
 ]

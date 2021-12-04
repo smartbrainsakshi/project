@@ -58,12 +58,15 @@
 		<div class="contact">
 
 			<div class="contact-head">
-				<h4>Predict Profit</h4>
+
+
+				<div ><a href="/accounts/predictor"><img style="margin-right: 700px" src="/static/images/exit.png" alt="back"> </a></div>
+				<h4>Check CashFlow</h4>
 				<div class="clear"> </div>
 			</div>
 			{% if not result %}
 			<form action="#" method="post" id="inform" >
-				<input type="text" style="width:100%" placeholder="House Name" name="house_name" id="house_name"></input>
+				<input type="text" style="width:100%" placeholder="House Tag" name="house_name" id="house_name"></input>
 				<input type="text" style="width: 50%" placeholder="zipcode" name="zipcode" id ="zipcode" >
 				<input type="text"  style="width: 49%" placeholder="square_feet" name="square_feet" id="square_feet" >
 				<input type="text" style="width: 50%" placeholder="condition" name="condition" id="condition" >
@@ -72,19 +75,19 @@
 				 <input type="text" style="width: 49%" placeholder="Duration to calculate" id="duration" name="duration" >
 
 				<div >
-				<label><input type="checkbox" id="mortgage" onclick="checkMortgage()"/> Add mortgage Amount </label>
+				<label id="lab"> <input type="checkbox" id="mortgage" onclick="checkMortgage()"/> Add mortgage Amount </label>
 				</div>
                    <br/>
 				<input type="text" style="width: 100% ;display:none;" placeholder="Mortgaged Amount" id = "amount" name="mortgage_principle" >
 		        <input type="text" style="width: 100%;display:none;" placeholder="Rate of Interest" id = "roi" name="rio" style = "display:none">
 		        <input type="text" style="width: 100%;display:none;" placeholder="time" id = "time" name="time" style = "display:none">
 
-				<input type="submit" value="Submit" id="submit" onclick="checkResult()"/>
+				<input type="submit"  value="Submit" id="submit" onclick="checkResult()"/>
 
 			</form>
 			{% endif %}
 			{% if result %}
-				<p>Predicted Price: {{result}} USD</p>
+				<p>Predicted Price: {{result}} </p>
 			{% endif %}
 
 		</div>
@@ -132,6 +135,8 @@
 		var square_feet = document.getElementById("square_feet");
 		var zipcode = document.getElementById("zipcode");
 		var text = document.getElementById("text");
+		var house_name = document.getElementById("house_name");
+		var label = document.getElementById("lab");
 		  roi.style.display="none";
 		  amount.style.display="none";
 		  time.style.display="none";
@@ -144,20 +149,12 @@
 		  square_feet.style.display="none";
 		  zipcode.style.display="none";
 		  text.style.display ="none";
+		  house_name.style.display ="none";
+		  label.style.display ="none";
 
 	}
 
-		function makeFormVisible()
-	{
-		var predict = document.getElementById("Predict");
-		var history = document.getElementById("history");
-		var vis = document.getElementById("vis");
-		var inform = document.getElementById("inform");
-	    predict.style.display="none";
-	    history.style.display="none";
-	    vis.style.display="none";
-		inform.style.display="block";
-	}
+
 
 
 

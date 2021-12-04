@@ -39,9 +39,9 @@
 
                     <div class="navbar-collapse collapse" id="mobile_menu">
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="#">Home</a></li>
+                            <li class="active"><a href="/accounts/predictor">Home</a></li>
                             <li><a href="/accounts/history">History</a></li>
-                            <li><a href="/accounts/graphs">Graphs</a></li>
+                            <li><a href="#">Graphs</a></li>
                             <li><a href="/accounts/logout" style="left: 800px">LogOut</a></li>
                         </ul>
 
@@ -55,39 +55,32 @@
 <!--header start here-->
 <div class="header agile">
 	<div class="wrap">
-		<div class="contact">
+		<div class="contact" style="width:600px; height:550px;">
 
 			<div class="contact-head">
-				<h4>Predict Profit</h4>
+				<h3>Average cost of house over one month</h3>
 				<div class="clear"> </div>
 			</div>
-			{% if not result %}
-			<form action="#" method="post" id="inform" >
-				<input type="text" style="width:100%" placeholder="House Name" name="house_name" id="house_name"></input>
-				<input type="text" style="width: 50%" placeholder="zipcode" name="zipcode" id ="zipcode" >
-				<input type="text"  style="width: 49%" placeholder="square_feet" name="square_feet" id="square_feet" >
-				<input type="text" style="width: 50%" placeholder="condition" name="condition" id="condition" >
-		        <input type="text" style="width: 49%" placeholder="bathrooms" name="bathrooms" id="bathrooms" >
-		        <input type="text" style="width: 50%" placeholder="bedrooms" name="bedrooms" id="bedroom">
-				 <input type="text" style="width: 49%" placeholder="Duration to calculate" id="duration" name="duration" >
 
-				<div >
-				<label><input type="checkbox" id="mortgage" onclick="checkMortgage()"/> Add mortgage Amount </label>
-				</div>
-                   <br/>
-				<input type="text" style="width: 100% ;display:none;" placeholder="Mortgaged Amount" id = "amount" name="mortgage_principle" >
-		        <input type="text" style="width: 100%;display:none;" placeholder="Rate of Interest" id = "roi" name="rio" style = "display:none">
-		        <input type="text" style="width: 100%;display:none;" placeholder="time" id = "time" name="time" style = "display:none">
+                   <div ><img style="width:600px; height:300px;" src="/static/images/graph1.png" alt=""> </div>
 
-				<input type="submit" value="Submit" id="submit" onclick="checkResult()"/>
 
-			</form>
-			{% endif %}
-			{% if result %}
-				<p>Predicted Price: {{result}} USD</p>
-			{% endif %}
 
 		</div>
+
+        <div class="contact" align="" style="width:600px; height:550px;">
+
+			<div class="contact-head">
+				<h2>Average cost of house over one year</h2>
+				<div class="clear"> </div>
+			</div>
+
+                   <div ><img style="width:600px; height:300px;" src="/static/images/graph2.png" alt=""> </div>
+
+
+
+		</div>
+
 	</div>
 </div>
 
