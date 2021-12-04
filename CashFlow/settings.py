@@ -81,11 +81,16 @@ WSGI_APPLICATION = 'CashFlow.wsgi.application'
 
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    "default": {
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": "cashflow_db",
+        "USER": "postgres",
+        "PASSWORD": "admin",
+        "HOST": "localhost",
+        "PORT": "5432",
     }
 }
+
 
 AUTHENTICATION_BACKENDS = [
     # Needed to login by username in Django admin, regardless of `allauth`
